@@ -1,0 +1,125 @@
+{
+  "name": "Primeiro projeto - Notícias de Aviação Integrada ao Discord",
+  "nodes": [
+    {
+      "parameters": {
+        "content": "**Projeto Monitor de Notícias de Aviação**\n\nAutor: Luan Lessa\nData da última edição: 23:32 - 09/11/2025\n\nFunção: A cada duas horas o gatilho busca no site AeroFlap a notícia mais recente e envia para o canal no Discord #noticias-aviação-n8n.\n",
+        "width": 496,
+        "color": 5
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -576,
+        -224
+      ],
+      "id": "28190d73-f505-469f-bf68-518c39dcfef4",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyX"
+            }
+          ]
+        },
+        "feedUrl": "https://www.aeroflap.com.br/rss"
+      },
+      "type": "n8n-nodes-base.rssFeedReadTrigger",
+      "typeVersion": 1,
+      "position": [
+        32,
+        -192
+      ],
+      "id": "e224311c-9f07-4e48-a316-8055d715ac58",
+      "name": "Gatilho Inicial",
+      "alwaysOutputData": false
+    },
+    {
+      "parameters": {
+        "authentication": "webhook",
+        "content": "=Título: {{ $json.title }}\nAutor: {{ $json.creator }}\nLink da notícia: {{ $json.link }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.discord",
+      "typeVersion": 2,
+      "position": [
+        256,
+        -192
+      ],
+      "id": "cf3517a9-44ea-464d-88d1-8dbd96c82e48",
+      "name": "Envio das Notícias",
+      "webhookId": "3dfcd941-3a31-4b34-9336-6b62c714c963",
+      "credentials": {
+        "discordWebhookApi": {
+          "id": "s8Mr3jMZxGd75Jaz",
+          "name": "Discord Webhook account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "Gatilho Inicial: Solicitação de verificação do site a cada duas horas e coletando os dados a partir do RSS.",
+        "height": 80,
+        "width": 278,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        32,
+        -288
+      ],
+      "id": "58390574-d06e-4696-ad65-f428372c5b3c",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "content": "Envio de Notícias: Encaminhamento para o webhook no servidor no Discord, determinando a organização e os dados que serão enviados.",
+        "height": 80,
+        "width": 342,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        256,
+        -64
+      ],
+      "id": "8fc19591-a763-4850-809c-85af87c1168e",
+      "name": "Sticky Note2"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Gatilho Inicial": {
+      "main": [
+        [
+          {
+            "node": "Envio das Notícias",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "callerPolicy": "workflowsFromSameOwner",
+    "availableInMCP": false,
+    "timezone": "America/Sao_Paulo",
+    "errorWorkflow": "u1KdN6ajPlKguERj",
+    "timeSavedPerExecution": 30
+  },
+  "versionId": "34e2c6dc-fdd8-4952-9fa1-54e2c0d4ea03",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "304be56c7600b87e9add3ae4051185a5e901ab29acfa213de84bee2e10b5c822"
+  },
+  "id": "u1KdN6ajPlKguERj",
+  "tags": []
+}
