@@ -8,6 +8,9 @@ A cada duas horas o gatilho inicial (RSS TRIGGER) busca no site AeroFlap a notí
 - Buscar dados/notícias a partir de sites na web.
 - Enviar para o canal do Discord
 
+## Visualização:
+! [Captura de Tela do n8n - Workflow] 
+! [Captura de Tela do Discord - Mensagem recebida] 
 ## Pré-requisitos
 - n8n hospedado, podendo ser em uma VPS ou localmente.
 - Conta no Discord.
